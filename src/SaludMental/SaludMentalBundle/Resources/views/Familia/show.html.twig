@@ -34,23 +34,27 @@
                     <th>Telefonos</th>
                 </tr>
                 {% for persona in entity.personas %}
-                    <td>{{persona.apellido | upper}}</td>
-                    <td>{{persona.nombre}}</td>
-                    <td>{{persona.documento}} : {{persona.nroDocumento}}</td>
-                    <td>{{persona.fechanacimiento | date('d/m/Y')}}</td>
-                    <td>{{persona.estadocivil}}</td>
-                    <td>{{persona.discapacidad}}</td>
-                    <td>{{persona.jubilado}}</td>
-                    <td>{{persona.pensionado}}</th>
-                    <td>{{persona.domicilio}} - {{persona.nrodomicilio}}</td>
-                    <td>{{persona.ciudad}}</td>
-                    <td>{{persona.telefonofijo}} - {{persona.telefonocelular}}</td>
+                    <tr>
+                        <td>{{persona.persona.apellido | upper}}</td>
+                        <td>{{persona.persona.nombre}}</td>
+                        <td>{{persona.persona.tipodocumento}} : {{persona.persona.nroDocumento}}</td>
+                        <td>{{persona.persona.fechanacimiento | date('d/m/Y')}}</td>
+                        <td>{{persona.persona.estadocivil}}</td>
+                        <td>{{persona.persona.discapacidad}}</td>
+                        <td>{{persona.persona.jubilado}}</td>
+                        <td>{{persona.persona.pensionado}}</th>
+                        <td>{{persona.persona.domicilio}} - {{persona.persona.nrodomicilio}}</td>
+                        <td>{{persona.persona.ciudad}}</td>
+                        <td>{{persona.persona.telefonofijo}} - {{persona.persona.telefonocelular}}</td>
+                    </tr>
                 {% else %}
-                    <td colspan="11">La familia esta sin integrantes!!</td>
+                    <tr>
+                        <td colspan="11">La familia esta sin integrantes!!</td>
+                    </tr>
                 {% endfor %}
                 <tfoot>
                     <tr>
-                        <td colspan="11"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="">&nbsp;Agregar Integrante</a></td>
+                        <td colspan="11"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="{{ path('new_persona', { 'id' : entity.id}) }}">&nbsp;Agregar Integrante</a></td>
                     </tr>
                 </tfoot>
             </table>

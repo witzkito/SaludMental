@@ -22,7 +22,8 @@
         "datatables/datatables": "1.10.4",
         "moment/moment": "2.8.4",
         "friendsofsymfony/jsrouting-bundle": "@stable",
-        "sg/datatablesbundle": "dev-master"
+        "sg/datatablesbundle": "dev-master",
+        "genemu/form-bundle": "2.2.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

@@ -1,3 +1,7 @@
 salud_mental_homepage:
     path:     /
     defaults: { _controller: SaludMentalBundle:Default:index }
+    
+Persona:
+    resource: "@SaludMentalBundle/Controller/PersonaController.php"
+    type:     annotation

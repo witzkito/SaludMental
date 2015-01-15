@@ -48,7 +48,7 @@ class Persona
      *
      * @ORM\Column(name="nroDocumento", type="string", length=255)
      * @Assert\Regex(
-     *     pattern="/[0-9][,]/",
+     *     pattern="/[0-9]/",
      *     match=true,
      *     message="Solo Numeros y Comas")
      * @Assert\Length(
@@ -498,5 +498,97 @@ class Persona
     public function getFamilias()
     {
         return $this->familias;
+    }
+
+    /**
+     * Set discapacidad
+     *
+     * @param boolean $discapacidad
+     * @return Persona
+     */
+    public function setDiscapacidad($discapacidad)
+    {
+        $this->discapacidad = $discapacidad;
+
+        return $this;
+    }
+
+    /**
+     * Get discapacidad
+     *
+     * @return boolean 
+     */
+    public function getDiscapacidad()
+    {
+        return $this->discapacidad;
+    }
+
+    /**
+     * Set jubilado
+     *
+     * @param boolean $jubilado
+     * @return Persona
+     */
+    public function setJubilado($jubilado)
+    {
+        $this->jubilado = $jubilado;
+
+        return $this;
+    }
+
+    /**
+     * Get jubilado
+     *
+     * @return boolean 
+     */
+    public function getJubilado()
+    {
+        return $this->jubilado;
+    }
+
+    /**
+     * Set pensionado
+     *
+     * @param boolean $pensionado
+     * @return Persona
+     */
+    public function setPensionado($pensionado)
+    {
+        $this->pensionado = $pensionado;
+
+        return $this;
+    }
+
+    /**
+     * Get pensionado
+     *
+     * @return boolean 
+     */
+    public function getPensionado()
+    {
+        return $this->pensionado;
+    }
+
+    /**
+     * Set haberes
+     *
+     * @param boolean $haberes
+     * @return Persona
+     */
+    public function setHaberes($haberes)
+    {
+        $this->haberes = $haberes;
+
+        return $this;
+    }
+
+    /**
+     * Get haberes
+     *
+     * @return boolean 
+     */
+    public function getHaberes()
+    {
+        return $this->haberes;
     }
 }
