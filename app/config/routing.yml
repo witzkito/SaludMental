@@ -1,0 +1,10 @@
+salud_mental:
+    resource: "@SaludMentalBundle/Resources/config/routing.yml"
+    prefix:   /
+
+Profesor:
+    resource: "@SaludMentalBundle/Controller/FamiliaController.php"
+    type:     annotation
+    
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

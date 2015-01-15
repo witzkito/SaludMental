@@ -1,0 +1,110 @@
+{% extends "SaludMentalBundle::layout.html.twig" %}
+
+{% block title %} Ver Familia{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <table class="table table-striped">
+                <tr>
+                    <th>Numero</th>
+                    <td>{{entity.id}}</td>
+                </tr>
+                <tr>
+                    <th>Nombre</th>
+                    <td>{{entity.nombre}}</td>
+                </tr>
+            </table>
+            
+            <br /><br />
+            <h2>Integrantes</h2>
+                    
+            <table class="table table-striped">
+                <tr>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th>Doc.</th>
+                    <th>Nacimiento</th>
+                    <th>Estado</th>
+                    <th>Disc.</th>
+                    <th>Jubililado</th>
+                    <th>Pensionado</th>
+                    <th>Domicilio</th>
+                    <th>Ciudad</th>
+                    <th>Telefonos</th>
+                </tr>
+                {% for persona in entity.personas %}
+                    <td>{{persona.apellido | upper}}</td>
+                    <td>{{persona.nombre}}</td>
+                    <td>{{persona.documento}} : {{persona.nroDocumento}}</td>
+                    <td>{{persona.fechanacimiento | date('d/m/Y')}}</td>
+                    <td>{{persona.estadocivil}}</td>
+                    <td>{{persona.discapacidad}}</td>
+                    <td>{{persona.jubilado}}</td>
+                    <td>{{persona.pensionado}}</th>
+                    <td>{{persona.domicilio}} - {{persona.nrodomicilio}}</td>
+                    <td>{{persona.ciudad}}</td>
+                    <td>{{persona.telefonofijo}} - {{persona.telefonocelular}}</td>
+                {% else %}
+                    <td colspan="11">La familia esta sin integrantes!!</td>
+                {% endfor %}
+                <tfoot>
+                    <tr>
+                        <td colspan="11"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="">&nbsp;Agregar Integrante</a></td>
+                    </tr>
+                </tfoot>
+            </table>
+                
+            <br /><br />
+            <h2>Hogar</h2>
+            
+            <table class="table table-striped">
+                {% if entity.hogar != null %}
+                    <tr>
+                        <th>Domicilio</th>
+                        <td>{{entity.hogar.domicilio}} - {{entity.hogar.nrodomicilio}}</td>
+                    </tr>
+                    <tr>
+                        <th>Barrio</th>
+                        <td>{{entity.hogar.barrio}}</td>
+                    </tr>
+                    <tr>
+                        <th>Ciudad</th>
+                        <td>{{entity.hogar.ciudad}}</td>
+                    </tr>
+                    <tr>
+                        <th>Tipo Hogar</th>
+                        <td>{{entity.hogar.tipo}}</td>
+                    </tr>
+                    <tr>
+                        <th>Tipo Baño</th>
+                        <td>{{entity.hogar.baño}}</td>
+                    </tr>
+                    <tr>
+                        <th>Tipo Agua</th>
+                        <td>{{entity.hogar.agua}}</td>
+                    </tr>
+                    <tr>
+                        <th>Tipo Electricidad</th>
+                        <td>{{entity.hogar.electricidad}}</td>
+                    </tr>
+                    <tr>
+                        <th>Cloaca</th>
+                        <td>{{entity.hogar.cloaca}}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="2">La familia no cuenta con un hogar registrado</td></tr>
+                {% endif %}
+                <tfoot>
+                    <tr>
+                        {% if entity.hogar is null %}
+                            <td><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="">&nbsp;Registrar Hogar</a></td>
+                        {% else %}
+                            <td><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="">&nbsp;Editar Hogar</a></td>
+                        {% endif %}
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+{% endblock %}

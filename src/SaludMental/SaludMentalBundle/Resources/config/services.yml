@@ -1,0 +1,5 @@
+services:
+    sg_datatables.familia:
+        class: SaludMental\SaludMentalBundle\Datatables\FamiliaDatatable
+        tags:
+            - { name: sg.datatable.view }

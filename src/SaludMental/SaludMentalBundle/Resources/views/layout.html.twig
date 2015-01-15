@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Salud Mental | {% block title %}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <script src="{{ asset('bundles/saludmental/components/jquery/jquery.js')}}"></script>
+        <script src="{{ asset('bundles/saludmental/components/moment/moment.js')}}"></script>
+        <link href="{{ asset('bundles/saludmental/components/datatable/css/jquery.dataTables.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bundles/saludmental/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bundles/saludmental/css/dashboard.css') }}" rel="stylesheet" type="text/css" />
+        <script src="{{ asset('bundles/saludmental/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('bundles/saludmental/components/datatable/js/jquery.dataTables.js') }}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        
+                    </button>
+                    <a class="navbar-brand" href="#">Salud Mental</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ path('salud_mental_homepage') }}">Inicio</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>                    
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        {% if app.request.attributes.get('_route_params') is null %}
+                            {% if path(app.request.attributes.get('_route')) == path('salud_mental_homepage') %}
+                                <li class="active">
+                            {% else %}
+                                <li>
+                            {% endif %}
+                                    <a href="{{ path('salud_mental_homepage') }}">Inicio</a>
+                                </li>
+                        {% else %}
+                            <li><a href="{{ path('salud_mental_homepage') }}">Inicio</a></li>
+                        {% endif %}
+                    </ul>
+                    <ul class="nav nav-sidebar">
+                        {% if app.request.attributes.get('_route_params') is null %}
+                            {% if path(app.request.attributes.get('_route')) == path('index_familia') %}
+                                <li class="active">
+                            {% else %}
+                                <li>
+                            {% endif %}
+                            <li><a href="{{ path('index_familia')}}">Buscar Familias</a></li>
+                            {% if path(app.request.attributes.get('_route')) == path('new_familia') %}
+                                <li class="active">
+                            {% else %}
+                                <li>
+                            {% endif %}
+                                    <a href="{{ path('new_familia')}}">Agregar Familia</a>
+                                </li>
+                        {% else %}
+                            <li><a href="{{ path('index_familia')}}">Buscar Familias</a></li>
+                            <li><a href="{{ path('new_familia')}}">Agregar Familia</a></li>
+                        {% endif %}
+                        <li><a href="">One more nav</a></li>
+                        <li><a href="">Another nav item</a></li>
+                        <li><a href="">More navigation</a></li>
+                    </ul>
+                    <ul class="nav nav-sidebar">
+                        <li><a href="">Nav item again</a></li>
+                        <li><a href="">One more nav</a></li>
+                        <li><a href="">Another nav item</a></li>
+                    </ul>
+                </div>                
+            </div>
+        </div>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

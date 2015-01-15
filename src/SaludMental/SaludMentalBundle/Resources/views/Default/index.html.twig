@@ -1,0 +1,31 @@
+{% extends "SaludMentalBundle::layout.html.twig" %}
+{% block title %} Inicio {% endblock %}
+{% block body %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <h1 class="page-header">Panel</h1>
+
+                    <div class="row placeholders">
+                        <div class="col-xs-6 col-sm-3 placeholder">
+                            <img src="{{asset('bundles/saludmental/images/violencia.png')}}" class="img-responsive" alt="Generic placeholder thumbnail">
+                            <h2>{{casos |length}}</h2>
+                            <span class="text-muted">CASOS</span>
+                        </div>
+                        <div class="col-xs-6 col-sm-3 placeholder">
+                            <img src="{{asset('bundles/saludmental/images/persona.png')}}" class="img-responsive" alt="Generic placeholder thumbnail">
+                            <h2>{{personas | length}}</h2>
+                            <span class="text-muted">PERSONAS</span>
+                        </div>
+                        <div class="col-xs-6 col-sm-3 placeholder">
+                            <img src="{{asset('bundles/saludmental/images/familia.png')}}" class="img-responsive" alt="Generic placeholder thumbnail">
+                            <h2>{{familias | length}}</h2>
+                            <span class="text-muted">FAMILIAS</span>
+                        </div>
+                        <div class="col-xs-6 col-sm-3 placeholder">
+                            <img src="{{asset('bundles/saludmental/images/hogar.png')}}" class="img-responsive" alt="Generic placeholder thumbnail">
+                            <h2>{{hogares | length}}</h2>
+                            <span class="text-muted">HOGARES</span>
+                        </div>
+                    </div>                    
+                </div>
+
+{% endblock %}
