@@ -36,8 +36,6 @@ class PersonaType extends AbstractType
             ->add('jubilado')
             ->add('pensionado')
             ->add('haberes')
-            ->add('ciudad',  'genemu_jqueryselect2_entity', array(
-                "class" => "SaludMentalBundle:Ciudad"))
         ;
     }
     

@@ -78,12 +78,6 @@ class Persona
     private $nroDomicilio;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Ciudad", inversedBy="personas")
-     * @ORM\JoinColumn(name="ciudad", referencedColumnName="id")
-     */
-    private $ciudad;
-    
-    /**
      * @var string
      *
      * @ORM\Column(name="telefonoFijo", type="string", length=100)
@@ -431,29 +425,6 @@ class Persona
     public function getOcupacion()
     {
         return $this->ocupacion;
-    }
-
-    /**
-     * Set ciudad
-     *
-     * @param \SaludMental\SaludMentalBundle\Entity\Ciudad $ciudad
-     * @return Persona
-     */
-    public function setCiudad(\SaludMental\SaludMentalBundle\Entity\Ciudad $ciudad = null)
-    {
-        $this->ciudad = $ciudad;
-
-        return $this;
-    }
-
-    /**
-     * Get ciudad
-     *
-     * @return \SaludMental\SaludMentalBundle\Entity\Ciudad 
-     */
-    public function getCiudad()
-    {
-        return $this->ciudad;
     }
 
     /**
