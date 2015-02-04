@@ -31,6 +31,7 @@
                     <th>Pensionado</th>
                     <th>Domicilio</th>
                     <th>Telefonos</th>
+                    <th></th>
                 </tr>
                 {% for persona in entity.personas %}
                     <tr>
@@ -44,6 +45,7 @@
                         <td>{{persona.persona.pensionado}}</th>
                         <td>{{persona.persona.domicilio}} - {{persona.persona.nrodomicilio}}</td>
                         <td>{{persona.persona.telefonofijo}} - {{persona.persona.telefonocelular}}</td>
+                        <td><a href="" onclick='confirmar("¿Desea borrar la persona de esta familia?","{{ path('delete_persona', { 'id' : persona.id}) }}")' ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                     </tr>
                 {% else %}
                     <tr>

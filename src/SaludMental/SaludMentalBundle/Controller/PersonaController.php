@@ -40,6 +40,19 @@ class PersonaController extends Controller
         return $this->render('SaludMentalBundle:Persona:new.html.twig',
                 array('form' => $form->createView(), 'familia' => $familia));
     }
+    
+    /**
+     * @Route("/persona/delete/{id}", name="delete_persona")
+     * @Template()
+     */
+    public function deleteAction($id)
+    {
+        $em =  $em = $this->getDoctrine()->getManager();
+        $personaFamilia = $em->getRepository("SaludMentalBundle:FamiliaPersona")->find($id);
+        $em->remove($personaFamilia);
+        $em->flush();
+        return new RedirectResponse($this->generateUrl('show_familia',array('id' => $personaFamilia->getFamilia()->getId())));
+    }
 
     /**
      * @Route("/persona/show/{id}")
