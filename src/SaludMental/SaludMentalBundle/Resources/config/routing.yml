@@ -5,3 +5,7 @@ salud_mental_homepage:
 Persona:
     resource: "@SaludMentalBundle/Controller/PersonaController.php"
     type:     annotation
+
+Hogar:
+    resource: "@SaludMentalBundle/Controller/HogarController.php"
+    type:     annotation
