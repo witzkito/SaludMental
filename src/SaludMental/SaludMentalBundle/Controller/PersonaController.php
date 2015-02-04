@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use SaludMental\SaludMentalBundle\Entity\Persona;
 use SaludMental\SaludMentalBundle\Form\PersonaType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PersonaController extends Controller
 {
@@ -34,6 +35,7 @@ class PersonaController extends Controller
             $em->persist($persona);
             $em->persist($personaFamilia);
             $em->flush();
+            return new RedirectResponse($this->generateUrl('show_familia',array('id' => $familia->getId())));
         }
         return $this->render('SaludMentalBundle:Persona:new.html.twig',
                 array('form' => $form->createView(), 'familia' => $familia));
