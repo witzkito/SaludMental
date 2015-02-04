@@ -66,9 +66,9 @@ class Hogar
     /**
      * @var string
      *
-     * @ORM\Column(name="baño", type="string", length=255)
+     * @ORM\Column(name="sanitario", type="string", length=255)
      */
-    private $baño;
+    private $sanitario;
 
     /**
      * @var string
@@ -200,26 +200,26 @@ class Hogar
     }
 
     /**
-     * Set baño
+     * Set sanitario
      *
-     * @param string $baño
+     * @param string $sanitario
      * @return Hogar
      */
-    public function setBaño($baño)
+    public function setSanitario($sanitario)
     {
-        $this->baño = $baño;
+        $this->sanitario = $sanitario;
 
         return $this;
     }
 
     /**
-     * Get baño
+     * Get 
      *
      * @return string 
      */
-    public function getBaño()
+    public function getSanitario()
     {
-        return $this->baño;
+        return $this->sanitario;
     }
 
     /**

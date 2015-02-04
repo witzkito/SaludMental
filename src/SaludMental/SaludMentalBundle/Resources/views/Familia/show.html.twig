@@ -30,7 +30,6 @@
                     <th>Jubililado</th>
                     <th>Pensionado</th>
                     <th>Domicilio</th>
-                    <th>Ciudad</th>
                     <th>Telefonos</th>
                 </tr>
                 {% for persona in entity.personas %}
@@ -44,7 +43,6 @@
                         <td>{{persona.persona.jubilado}}</td>
                         <td>{{persona.persona.pensionado}}</th>
                         <td>{{persona.persona.domicilio}} - {{persona.persona.nrodomicilio}}</td>
-                        <td>{{persona.persona.ciudad}}</td>
                         <td>{{persona.persona.telefonofijo}} - {{persona.persona.telefonocelular}}</td>
                     </tr>
                 {% else %}
@@ -81,20 +79,29 @@
                         <td>{{entity.hogar.tipo}}</td>
                     </tr>
                     <tr>
-                        <th>Tipo Baño</th>
-                        <td>{{entity.hogar.baño}}</td>
+                        <th>Tipo Sanitario</th>
+                        <td>{{entity.hogar.sanitario}}</td>
                     </tr>
                     <tr>
                         <th>Tipo Agua</th>
                         <td>{{entity.hogar.agua}}</td>
                     </tr>
                     <tr>
-                        <th>Tipo Electricidad</th>
-                        <td>{{entity.hogar.electricidad}}</td>
+                        <th>Electricidad</th>
+                        {% if entity.hogar.electricidad %}
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                        {% else %}
+                            <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th>Cloaca</th>
-                        <td>{{entity.hogar.cloaca}}</td>
+                        {% if entity.hogar.cloaca%}
+                            <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                        {% else %}
+                            <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+                        {% endif %}
+
                     </tr>
                 {% else %}
                     <tr><td colspan="2">La familia no cuenta con un hogar registrado</td></tr>
@@ -102,7 +109,7 @@
                 <tfoot>
                     <tr>
                         {% if entity.hogar is null %}
-                            <td><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="">&nbsp;Registrar Hogar</a></td>
+                            <td><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="{{ path('new_hogar', { 'id' : entity.id })}}">&nbsp;Registrar Hogar</a></td>
                         {% else %}
                             <td><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="">&nbsp;Editar Hogar</a></td>
                         {% endif %}

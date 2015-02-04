@@ -17,13 +17,21 @@ class HogarType extends AbstractType
         $builder
             ->add('domicilio')
             ->add('nroDomicilio')
-            ->add('barrio')
-            ->add('tipo')
-            ->add('baño')
-            ->add('agua')
-            ->add('electricidad')
-            ->add('cloaca')
+            ->add('barrio')                
             ->add('ciudad')
+            ->add('tipo', 'choice', array(
+                'choices' => array('Material' => 'Material', 'Madera' => 'Madera')
+            ))
+            ->add('sanitario', 'choice', array(
+                'choices' => array('Instalado' => 'Instalado', 'Letrina' => 'Letrina', 'No' => 'No' )
+            ))
+            ->add('agua', 'choice', array(
+                'choices' => array('Potable' => 'Potable', 'Poso' => 'Poso', 'Vertiente' => 'Vertiente' )
+            ))
+            ->add('electricidad','choice', array(
+                'choices' => array(true => 'Si', false => 'No')))
+            ->add('cloaca', 'choice', array(
+                'choices' => array(true => 'Si', false => 'No')))
         ;
     }
     
