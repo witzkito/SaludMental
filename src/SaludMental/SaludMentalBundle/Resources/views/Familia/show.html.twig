@@ -21,6 +21,7 @@
                     
             <table class="table table-striped">
                 <tr>
+                    <th>Relacion</th>
                     <th>Apellido</th>
                     <th>Nombre</th>
                     <th>Doc.</th>
@@ -35,6 +36,11 @@
                 </tr>
                 {% for persona in entity.personas %}
                     <tr>
+                        {% if persona.relacion == null %}
+                            <td><a href="{{ path('edit_familia_persona', {'id' : persona.id}) }}">Editar</a></td>
+                        {% else %}
+                            <td><a href="{{ path('edit_familia_persona', {'id' : persona.id}) }}">{{persona.relacion}}</a></td>
+                        {% endif %}
                         <td>{{persona.persona.apellido | upper}}</td>
                         <td>{{persona.persona.nombre}}</td>
                         <td>{{persona.persona.tipodocumento}} : {{persona.persona.nroDocumento}}</td>
@@ -45,7 +51,7 @@
                         <td>{{persona.persona.pensionado}}</th>
                         <td>{{persona.persona.domicilio}} - {{persona.persona.nrodomicilio}}</td>
                         <td>{{persona.persona.telefonofijo}} - {{persona.persona.telefonocelular}}</td>
-                        <td><a href="" onclick='confirmar("¿Desea borrar la persona de esta familia?","{{ path('delete_persona', { 'id' : persona.id}) }}")' ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+                        <td><a href="#" onclick='confirmar("¿Desea borrar la persona de esta familia?","{{ path('delete_persona', { 'id' : persona.id}) }}")' ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                     </tr>
                 {% else %}
                     <tr>
@@ -54,7 +60,7 @@
                 {% endfor %}
                 <tfoot>
                     <tr>
-                        <td colspan="11"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="{{ path('new_persona', { 'id' : entity.id}) }}">&nbsp;Agregar Integrante</a></td>
+                        <td colspan="11"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="{{ path('new_list_persona', { 'id' : entity.id}) }}">&nbsp;Agregar Integrante</a></td>
                     </tr>
                 </tfoot>
             </table>

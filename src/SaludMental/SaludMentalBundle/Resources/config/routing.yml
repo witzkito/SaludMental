@@ -9,3 +9,7 @@ Persona:
 Hogar:
     resource: "@SaludMentalBundle/Controller/HogarController.php"
     type:     annotation
+    
+FamiliaPersona:
+    resource: "@SaludMentalBundle/Controller/FamiliaPersonaController.php"
+    type:     annotation

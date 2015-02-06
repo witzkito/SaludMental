@@ -11,6 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\Session\Session;
+use SaludMental\SaludMentalBundle\Form\FamiliaPersonaType;
 
 class FamiliaController extends Controller
 {
@@ -161,6 +163,31 @@ class FamiliaController extends Controller
         return $this->render('SaludMentalBundle:Familia:show.html.twig',
                 array("entity" => $familia));
         
+    }
+    
+    /**
+     * @Route("/familia/add/persona/{id}", name="add_persona_familia", options={"expose"=true})
+     * @Template()
+     */
+    public function addPersonaAction($id)
+    {
+        $session = new Session();
+        
+        $em =  $em = $this->getDoctrine()->getManager();
+        $persona = $em->getRepository("SaludMentalBundle:Persona")->find($id);
+        $familia = $em->getRepository("SaludMentalBundle:Familia")->find($session->get('id_familia'));
+        
+        $familiaPersona = new \SaludMental\SaludMentalBundle\Entity\FamiliaPersona;
+        $familiaPersona->setFamilia($familia);
+        $familiaPersona->setPersona($persona);
+        $familia->addPersona($familiaPersona);
+        $persona->addFamilia($familiaPersona);
+        $em->persist($familiaPersona);
+        $em->persist($familia);
+        $em->persist($persona);
+        $em->flush();
+        return $this->render('SaludMentalBundle:Familia:show.html.twig',
+                array("entity" => $familia));
     }
 
 }

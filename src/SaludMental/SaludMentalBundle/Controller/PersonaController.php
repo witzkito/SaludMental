@@ -8,6 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use SaludMental\SaludMentalBundle\Entity\Persona;
 use SaludMental\SaludMentalBundle\Form\PersonaType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class PersonaController extends Controller
 {
@@ -53,6 +57,68 @@ class PersonaController extends Controller
         $em->flush();
         return new RedirectResponse($this->generateUrl('show_familia',array('id' => $personaFamilia->getFamilia()->getId())));
     }
+        
+    /**
+     * @Route("/persona/new/list/{id}", name="new_list_persona")
+     * @Template()
+     */
+    public function newListAction($id)
+    {
+        
+        $repository = $this->getDoctrine()->getRepository('SaludMentalBundle:Persona');
+        $em =  $em = $this->getDoctrine()->getManager();
+        $familia = $em->getRepository("SaludMentalBundle:Familia")->find($id);
+        
+        $session = new Session();
+        
+        
+        $session->set('id_familia', $familia->getId());
+
+
+        $query = $repository->createQueryBuilder('p')
+            ->select('p')
+            ->getQuery();
+
+        $results = $query->getArrayResult();
+        
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+        
+        $personaNewListDatatable = $this->get("sg_datatables.persona.new.list");
+        $personaNewListDatatable->buildDatatableView();
+        $personaNewListDatatable->setData($serializer->serialize($results, 'json'));
+        
+
+
+        return $this->render('SaludMentalBundle:Persona:newList.html.twig',
+                array("datatable" => $personaNewListDatatable));        
+    }
+    
+    /**
+     * Get all Post entities.
+     *
+     * @Route("/persona/new/list/results", name="persona_results")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexResultsAction() {
+        /**
+         * @var \Sg\DatatablesBundle\Datatable\Data\DatatableData $datatable
+         */
+        $datatable = $this->get("sg_datatables.datatable")->getDatatable($this->get("sg_datatables.persona.new.list"));
+
+        // Callback example
+        $function = function($qb) {
+            $qb->andWhere("Persona.visible = true");
+        };
+
+        // Add callback
+        $datatable->addWhereBuilderCallback($function);
+
+        return $datatable->getResponse();
+    }
+    
 
     /**
      * @Route("/persona/show/{id}")

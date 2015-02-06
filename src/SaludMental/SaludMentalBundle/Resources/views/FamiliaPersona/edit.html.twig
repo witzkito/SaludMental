@@ -1,0 +1,16 @@
+{% extends "SaludMentalBundle::layout.html.twig" %}
+
+{% block title %} Editar Relacion {{ entity.persona.nombre}} con {{ entity.familia.nombre}}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h3>Editar Relacion {{ entity.persona.nombre}} con {{ entity.familia.nombre}}</h3>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <form action="{{ path('edit_familia_persona', { 'id' : entity.id}) }}" method="post">
+                        {{ form_rest(form) }}
+                    <input type="submit" class="btn btn-default btn-ok" value="Guardar">
+                </form>
+            
+        </div>
+    </div>
+{% endblock %}

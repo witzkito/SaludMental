@@ -3,3 +3,8 @@ services:
         class: SaludMental\SaludMentalBundle\Datatables\FamiliaDatatable
         tags:
             - { name: sg.datatable.view }
+            
+    sg_datatables.persona.new.list:
+        class: SaludMental\SaludMentalBundle\Datatables\PersonaNewListDatatable
+        tags:
+            - { name: sg.datatable.view }
