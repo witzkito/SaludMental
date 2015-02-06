@@ -177,15 +177,20 @@ class FamiliaController extends Controller
         $persona = $em->getRepository("SaludMentalBundle:Persona")->find($id);
         $familia = $em->getRepository("SaludMentalBundle:Familia")->find($session->get('id_familia'));
         
-        $familiaPersona = new \SaludMental\SaludMentalBundle\Entity\FamiliaPersona;
-        $familiaPersona->setFamilia($familia);
-        $familiaPersona->setPersona($persona);
-        $familia->addPersona($familiaPersona);
-        $persona->addFamilia($familiaPersona);
-        $em->persist($familiaPersona);
-        $em->persist($familia);
-        $em->persist($persona);
-        $em->flush();
+        $familiaPersona =$em->getRepository("SaludMentalBundle:FamiliaPersona")->findOneBy(array('familia' => $familia->getId(),
+            "persona" => $persona->getId()));
+        if (!$familiaPersona != null)
+        {
+            $familiaPersona = new \SaludMental\SaludMentalBundle\Entity\FamiliaPersona;
+            $familiaPersona->setFamilia($familia);
+            $familiaPersona->setPersona($persona);
+            $familia->addPersona($familiaPersona);
+            $persona->addFamilia($familiaPersona);
+            $em->persist($familiaPersona);
+            $em->persist($familia);
+            $em->persist($persona);
+            $em->flush();
+        }
         return $this->render('SaludMentalBundle:Familia:show.html.twig',
                 array("entity" => $familia));
     }
