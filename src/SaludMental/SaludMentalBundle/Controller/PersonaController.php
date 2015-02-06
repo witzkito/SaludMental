@@ -131,13 +131,30 @@ class PersonaController extends Controller
             );    }
 
     /**
-     * @Route("/persona/edit/{id}")
+     * @Route("/persona/edit/{id}", name="edit_persona")
      * @Template()
      */
     public function editAction($id)
     {
-        return array(
-                // ...
-            );    }
+        $em =  $em = $this->getDoctrine()->getManager();
+        $familiaPersona = $em->getRepository("SaludMentalBundle:FamiliaPersona")->find($id);
+        $persona = $familiaPersona->getPersona();
+        $familia = $familiaPersona->getFamilia();
+        $form = $this->get('form.factory')->create(
+            new PersonaType(),
+            $persona
+        );
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST'){
+            $form->bind($request);
+            $persona = $form->getData();
+            $em->persist($persona);
+            $em->flush();
+            return new RedirectResponse($this->generateUrl('show_familia',array('id' => $familia->getId())));
+        }
+        return $this->render('SaludMentalBundle:Persona:edit.html.twig',
+                array('form' => $form->createView(), 'entity' => $familiaPersona));
+        
+        }
 
 }
